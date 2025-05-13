@@ -1,6 +1,18 @@
-import express from 'express';
-import path from 'path';
-
+import express from "express";
 
 const app = express();
-const port = 3000;
+const PORT = process.env.PORT || 3000;
+
+app.use(express.json());
+
+const start = () => {
+  try {
+    app.listen(PORT, () => {
+      console.log(`App is running on port ${PORT}...`);
+    });
+  } catch (error) {
+    console.log(`An error occurred while starting the application.\n ${error}`);
+  }
+};
+
+start();
