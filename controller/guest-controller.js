@@ -1,4 +1,4 @@
-import { writeToFile } from "../utils/file-helper.js";
+import { readFileData, writeToFile } from "../utils/file-helper.js";
 
 const submitForm = async (request, response) => {
   try {
@@ -23,11 +23,24 @@ const submitForm = async (request, response) => {
     response
       .status(201)
       .json({ status: "success", message: "User added successfully" });
-  } catch (e) {
+  } catch (error) {
     response
       .status(500)
       .json({ status: "fail", message: `An error occurred\n ${error}` });
   }
 };
 
-export { submitForm };
+const getGuestsInfo = async (request, response) => {
+  try {
+    const guestsInfo = await readFileData("guestbook.txt");
+    console.log(guestsInfo);
+
+    response.status(200).json({ status: "success", message: guestsInfo });
+  } catch (error) {
+    response
+      .status(500)
+      .json({ status: "fail", message: `An error occurred\n ${error}` });
+  }
+};
+
+export { submitForm, getGuestsInfo };

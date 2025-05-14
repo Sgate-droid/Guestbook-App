@@ -3,7 +3,7 @@ import fs from "fs/promises";
 async function readFileData(filePath) {
   try {
     let data = await fs.readFile(filePath);
-    data.toString().trim();
+    return data.toString().trim();
   } catch {
     await fs.writeToFile(filePath, "");
     let newData = await fs.readFile(filePath);
